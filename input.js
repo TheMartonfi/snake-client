@@ -1,4 +1,6 @@
 let connection;
+const { keyInputs } = require('./constants');
+
 
 const setupInput = (conn) => {
   
@@ -10,25 +12,17 @@ const setupInput = (conn) => {
   stdin.resume();
 
   const handleUserInput = () => {
-    stdin.on('data', (key) => {
+    stdin.on('data', (input) => {
 
-      if (key === '\u0003') {
+      if (input === '\u0003') {
         conn.write('The application is now closing.');
         process.exit();
-      } else if (key === 'w') {
-        conn.write('Move: up');
-      } else if (key === 'a') {
-        conn.write('Move: left');
-      } else if (key === 's') {
-        conn.write('Move: down');
-      } else if (key === 'd') {
-        conn.write('Move: right');
-      } else if (key === 'q') {
-        conn.write(`Say: Let's get this bread!`); 
-      } else if (key === 'e') {
-        conn.write(`Say: Good Game`);
-      } else if (key === 'r') {
-        conn.write(`Say: The input lag is awful`);
+      } else {
+        for (const key in keyInputs) {
+          if (input === key) {
+            conn.write(keyInputs[key]);
+          }
+        }
       }
 
     });
