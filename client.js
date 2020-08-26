@@ -9,6 +9,11 @@ const connect = function() {
 
   conn.setEncoding('utf8');
 
+  conn.on('connect', () => {
+    console.log('Succesfully Connected!')
+    conn.write('Name: TMF');
+  });
+
   conn.on('data', (data) => {
     console.log('Data: ', data);
   });
