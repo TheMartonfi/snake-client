@@ -23,14 +23,18 @@ const setupInput = (conn) => {
         conn.write('Move: down');
       } else if (key === 'd') {
         conn.write('Move: right');
+      } else if (key === 'q') {
+        conn.write(`Say: Let's get this bread!`); 
+      } else if (key === 'e') {
+        conn.write(`Say: Good Game`);
+      } else if (key === 'r') {
+        conn.write(`Say: The input lag is awful`);
       }
 
     });
   };
-  
   handleUserInput();
   return stdin;
-
 };
 
 module.exports = { setupInput };
